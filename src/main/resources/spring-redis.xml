@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       ">
+
+    <mvc:annotation-driven/>
+    <context:property-placeholder location="classpath:jedis.properties"/>
+
+    <!--连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="2048"/>
+        <property name="maxIdle" value="200"/>
+        <property name="numTestsPerEvictionRun" value="1024"/>
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>
+        <property name="minEvictableIdleTimeMillis" value="-1"/>
+        <property name="softMinEvictableIdleTimeMillis" value="10000"/>
+        <property name="maxWaitMillis" value="15000"/>
+    </bean>
+
+    <!--集群配置-->
+    <bean class="redis.clients.jedis.ShardedJedisPool" destroy-method="close">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1">
+            <list>
+                <!--主节点配置-->
+                <bean name="master" class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.master.ip}"/>
+                    <constructor-arg index="1" value="${redis.master.port}"/>
+                </bean>
+                <!--从节点配置-->
+                <!--<bean name="slaver" class="redis.clients.jedis.JedisShardInfo">-->
+                <!--<constructor-arg index="0" value="${redis.node2.ip}"/>-->
+                <!--<constructor-arg index="1" value="${redis.node2.port}"/>-->
+                <!--</bean>-->
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
