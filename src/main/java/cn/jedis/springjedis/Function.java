@@ -1,4 +1,4 @@
-package springjedis;
+package cn.jedis.springjedis;
 
 /**
  * created by IntelliJ IDEA

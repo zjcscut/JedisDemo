@@ -1,8 +1,8 @@
-package cn.ppfix.controller;
+package cn.jedis.controller;
 
-import cn.ppfix.springjedis.RedisService;
+import cn.jedis.jedis.ThreadSleep;
+import cn.jedis.springjedis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,11 +22,9 @@ public class JedisController {
     public String Test() {
         try {
             redisService.set("zjc", "zjcppfix", 5);
-            Thread.sleep(3);
+            ThreadSleep.Sleep(); //sleep 3s
             System.out.println(redisService.get("zjc"));
-
-            Thread.sleep(3);
-
+            ThreadSleep.Sleep();//sleep 3s
             System.out.println(redisService.get("zjc"));
         } catch (Exception e) {
             e.printStackTrace();

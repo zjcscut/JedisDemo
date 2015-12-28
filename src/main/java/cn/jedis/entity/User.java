@@ -1,4 +1,4 @@
-package cn.ppfix.entity;
+package cn.jedis.entity;
 
 /**
  * created by IntelliJ IDEA

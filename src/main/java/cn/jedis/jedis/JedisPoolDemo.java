@@ -1,4 +1,4 @@
-package cn.ppfix.jedis;
+package cn.jedis.jedis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

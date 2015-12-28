@@ -1,4 +1,4 @@
-package cn.ppfix.util;
+package cn.jedis.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

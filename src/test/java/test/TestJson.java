@@ -1,7 +1,7 @@
 package test;
 
-import cn.ppfix.entity.User;
-import cn.ppfix.util.JsonUtil;
+import cn.jedis.entity.User;
+import cn.jedis.util.JsonUtil;
 import org.junit.Test;
 
 /**

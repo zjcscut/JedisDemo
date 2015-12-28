@@ -1,11 +1,9 @@
 package test;
 
+import cn.jedis.jedis.ThreadSleep;
+import cn.jedis.springjedis.RedisService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import springjedis.RedisService;
 
 
 /**
@@ -14,9 +12,8 @@ import springjedis.RedisService;
  * @author zjc
  * @time 2015/12/27-23:02
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring-redis.xml")
-public class TestJedis {
+
+public class TestJedis extends BaseSpringTestCase{
 
     @Autowired
     private RedisService redisService;
@@ -24,12 +21,10 @@ public class TestJedis {
     @Test
     public void TestClient(){
         try {
-            redisService.set("zjc","zjcppfix",5);
-            Thread.sleep(3);
+            redisService.set("zjc", "zjcppfix", 5);
+            ThreadSleep.Sleep(); //sleep 3s
             System.out.println(redisService.get("zjc"));
-
-            Thread.sleep(3);
-
+            ThreadSleep.Sleep();//sleep 3s
             System.out.println(redisService.get("zjc"));
         }catch (Exception e){
             e.printStackTrace();
